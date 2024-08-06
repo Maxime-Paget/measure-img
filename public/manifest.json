@@ -1,0 +1,17 @@
+{
+    "lang": "en-us",
+    "name": "Size calculator on image",
+    "short_name": "Iage size calcultator",
+    "description": "An application to calculate size of an object from an image",
+    "start_url": "/",
+    "background_color": "#2f3d58",
+    "theme_color": "#2f3d58",
+    "orientation": "any",
+    "display": "standalone",
+    "icons": [
+        {
+            "src": "/assets/logo-img-ruler.png",
+            "sizes": "512x512"
+        }
+    ]
+}
