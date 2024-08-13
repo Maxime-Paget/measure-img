@@ -1,0 +1,165 @@
+@charset "UTF-8";
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd,
+ul,
+hr {
+  margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role=list],
+ol[role=list] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+  -webkit-text-decoration-skip: ink;
+          text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+ul {
+  padding: 0;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+* .hide {
+  display: none;
+}
+
+body {
+  height: 100vh;
+  width: 99vw;
+}
+
+.--flex {
+  display: flex;
+}
+.--flex.--row {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.--flex.--column {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  overflow: hidden;
+}
+
+header {
+  height: 10svh;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  height: 80svh;
+}
+main .actions {
+  height: 5rem;
+}
+
+footer {
+  height: 10svh;
+}
+
+.carousel {
+  overflow-x: auto;
+  display: flex;
+  -ms-overflow-style: none;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  box-shadow: 0.5em 0.5em 1.5rem 0.5rem hsla(0, 0%, 0%, 0.25);
+  border: solid 1px hsla(0, 0%, 0%, 0.25);
+  position: relative;
+  align-items: center;
+  width: 40rem;
+  aspect-ratio: 16/9;
+}
+.carousel:empty::after {
+  content: "Aucune image séléctionnée";
+  position: absolute;
+  width: 100%;
+  text-align: center;
+}
+.carousel::-webkit-scrollbar {
+  width: 50rem;
+  display: none;
+}
+.carousel__slide {
+  width: 100%;
+  height: 100%;
+  cursor: crosshair;
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  border: solid;
+  background-image: var(--slide-image);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.carousel-add {
+  cursor: pointer;
+  font-size: 20svh;
+}
+.carousel .line {
+  position: absolute;
+  background-color: red;
+}/*# sourceMappingURL=main.css.map */

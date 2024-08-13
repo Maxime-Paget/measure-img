@@ -1,1 +1,3 @@
-@use 'components/';
+@use 'base/' as *;
+@use 'components/' as *;
+@use 'layout/' as *;

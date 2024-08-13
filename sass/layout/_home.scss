@@ -1,0 +1,66 @@
+body {
+    overflow: hidden;
+}
+
+header {
+    height: 10svh;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 80svh;
+    & .actions {
+        height: 5rem;
+    }
+}
+
+footer {
+    height: 10svh;
+}
+
+.carousel {
+    overflow-x: auto;
+    display: flex;
+    -ms-overflow-style: none;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    box-shadow: 0.5em 0.5em 1.5rem 0.5rem hsla(0, 0%, 0%, 0.25);
+    border: solid 1px hsla(0, 0%, 0%, 0.25);
+    position: relative;
+    align-items: center;
+    &:empty::after {
+        content: "Aucune image séléctionnée";
+        position: absolute;
+        width: 100%;
+        text-align: center;
+    }
+    width: 40rem;
+    aspect-ratio: 16/9;
+    &::-webkit-scrollbar {
+        width: 50rem;
+        display: none;
+    }
+    &__slide {
+        width: 100%;
+        height: 100%;
+        cursor: crosshair;
+        flex: 0 0 auto;
+        scroll-snap-align: start;
+        border: solid;
+        background-image: var(--slide-image);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    &-add {
+        cursor: pointer;
+        font-size: 20svh;
+    }
+    & .line {
+        position: absolute;
+        background-color: red;
+    }
+}
