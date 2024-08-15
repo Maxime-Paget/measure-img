@@ -1,57 +1,71 @@
-window.customElements.define('image-slide', class Slide extends HTMLElement {
-    /** @type {string} */ src;
-    /** @type {number} */ slideId;
-    /** @type {boolean} */ canDraw = false;
+// import { Line } from "../stores/line.store";
 
-    /** @type {boolean} */ isDrawing = false;
-    static observedAttributes = ["src", "id"]
+import { Line } from "../stores/line.store.js";
+
+class Slide extends HTMLCanvasElement {
+    /** @type {string} */ src;
+    /** @type {number} */ slideid;
+
+    static observedAttributes = ["src", "slideid"]
 
     constructor() {
         super();
         this.src = this.getAttribute('src')?.trim();
-        this.slideId = parseInt(this.getAttribute('slideId'));
+        this.slideid = this.getAttribute('slideid'); 
+        /** @type {boolean} */ this.isPressed = false;
     }
-
     
     connectedCallback() {
         this.style = `--slide-image: url(${this.src});`
         this.classList.add('carousel__slide');
-        
-        let pressTimer;
-        
+
+        /** @type {Line?} */
+        let line;
+
         this.addEventListener('mouseup', (ev) => {
-            clearTimeout(pressTimer);
-            // Clear timeout
-            this.canDraw = false;
-            this.isDrawing = false;
-            console.log('stop press')
+            this.isPressed = false;
         })
+
+        this.addEventListener('mouseleave', (ev) => {
+            this.isPressed = false;
+        })
+
         this.addEventListener('mousedown', (ev) => {
-            this.canDraw = true;
+            ev.preventDefault()
+            this.width = this.clientWidth || 652;
+            this.height = this.clientHeight || 352;
+            this.isPressed = true;
+            const startX=ev.offsetX
+            const startY=ev.offsetY
+            line = new Line({ x: startX, y: startY });
         })
         
-        this.addEventListener('mousemove', () => {
-            if (this.canDraw) {
-                console.log('drawing')
+        let x = 15;
+        this.addEventListener('mousemove', (e) => {
+            e.preventDefault()
+            if (this.isPressed) {
+                const mouseX = e.offsetX
+                const mouseY = e.offsetY
+                line.resize('end', { x: mouseX, y: mouseY });
+                const ctx =  this.getContext('2d');
+                ctx.clearRect(0, 0, this.width, this.height)
+                this.drawLine(line, ctx);
             }
         })
-
-        this.addEventListener('mouseleave', () => {
-            clearTimeout(pressTimer);
-
-            this.canDraw = false;
-            this.isDrawing = false;
-        })
-
     }
 
 
     /**
      * 
-     * @param {Event} _ev 
+     * @param {Line} line
+     * @param {CanvasRenderingContext2D} ctx 
      */
-    drawLine(_ev) {
-        
+    drawLine(line, ctx) {
+        ctx.beginPath();
+        // ctx.lineWidth = 5
+        ctx.moveTo(line.coordinates.start.x, line.coordinates.start.y);
+        ctx.lineTo(line.coordinates.end.x, line.coordinates.end.y);
+        ctx.stroke();
     }
 
     /**
@@ -64,4 +78,8 @@ window.customElements.define('image-slide', class Slide extends HTMLElement {
         this[name] = newValue;
     }
 
+}
+
+window.customElements.define('image-slide', Slide, {
+    extends: 'canvas'
 })
