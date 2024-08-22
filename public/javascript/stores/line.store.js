@@ -1,5 +1,10 @@
 const lines = []
 export const linesStore = {
+    scale: {
+        length: null,
+        value: null,
+        unit: null
+    },
     get lines () {
         return lines;
     },
@@ -52,10 +57,10 @@ export class Line {
         }
     }
 
-    get width() {
-        // APPLY pythagore
-        // X = ENDX - STARTX
-        // Y = ENDY - STARTY
-        // HYPOTHENUSE^2 = X^2 + Y^2
+    get length() {
+        const dx = this.coordinates.end.x - this.coordinates.start.x;
+        const dy = this.coordinates.end.y - this.coordinates.start.y;
+
+        return Math.hypot(dx, dy);
     }
 }

@@ -1,6 +1,6 @@
 // import { Line } from "../stores/line.store";
 
-import { Line } from "../stores/line.store.js";
+import { Line, linesStore } from "../stores/line.store.js";
 
 class Slide extends HTMLCanvasElement {
     /** @type {string} */ src;
@@ -49,7 +49,16 @@ class Slide extends HTMLCanvasElement {
         this.addEventListener('mousedown', (ev) => {
             ev.preventDefault()
             this.isPressed = !this.isPressed;
-            if(!this.isPressed) return;
+            if(!this.isPressed) {
+                if (this.hasAttribute('scale')) {
+                    linesStore.scale.length = line.length;
+                    linesStore.scale.value = 2;
+                    console.log('scale', linesStore.scale.length);
+                } else {
+                    console.log('other',line.length, ((line.length / linesStore.scale.length).toFixed(2) * linesStore.scale.value) );
+                }
+                return;
+            };
 
             this.width = this.clientWidth || 652;
             this.height = this.clientHeight || 352;
@@ -58,7 +67,6 @@ class Slide extends HTMLCanvasElement {
             line = new Line({ x: startX, y: startY });
         })
         
-        let x = 15;
         this.addEventListener('mousemove', (e) => {
             e.preventDefault()
             if (this.isPressed) {
