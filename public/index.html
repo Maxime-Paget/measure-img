@@ -10,7 +10,14 @@
     <title>Image ruler</title>
 </head>
 <body>
-    <header></header>
+    <header>
+        <div class="scale-container">
+        </div>
+        <label class="scale-label" for="addScale">+</label>
+        <input type="file" id="addScale" accept="image/*" hidden/>
+        <input type="number" name="scale" id="scale" placeholder="1" min="1">
+        <input type="text" name="scaleUnit" id="scaleUnit" placeholder="cm">
+    </header>
     <main>
         <div class="actions"></div>
         <div class="carousel-group --flex --row">
@@ -18,6 +25,7 @@
             <label class="carousel-add" for="addImg">+</label>
             <input type="file" id="addImg" accept="image/*" hidden/>
         </div>
+        <ul class="carousel-nav"></ul>
     </main>
     <footer></footer>
 </body>

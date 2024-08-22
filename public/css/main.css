@@ -61,6 +61,10 @@ select {
   font: inherit;
 }
 
+input:user-invalid {
+  border: solid 1px red;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -103,6 +107,14 @@ body {
 
 header {
   height: 10svh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+header .scale-container {
+  height: 100%;
+  position: relative;
 }
 
 main {
@@ -154,6 +166,7 @@ footer {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center center;
+  aspect-ratio: 16/9;
 }
 .carousel-add {
   cursor: pointer;
@@ -162,4 +175,47 @@ footer {
 .carousel .line {
   position: absolute;
   background-color: red;
+}
+.carousel-nav {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  gap: 0.2rem;
+}
+.carousel-nav__item {
+  margin-top: 0.1rem;
+}
+.carousel-nav__item a {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #333;
+  background-clip: content-box;
+  border-radius: 50%;
+}
+
+:-webkit-full-screen .fullscreen-btn {
+  background-image: url("/assets/fullscreen_exit.svg");
+}
+
+:fullscreen .fullscreen-btn {
+  background-image: url("/assets/fullscreen_exit.svg");
+}
+
+.fullscreen-btn {
+  position: absolute;
+  top: 1%;
+  right: 1%;
+  background-image: url("/assets/fullscreen.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 2rem;
+  width: 2rem;
+}
+.fullscreen-btn:-webkit-full-screen {
+  background-image: url("/assets/fullscreen_exit.svg");
+}
+.fullscreen-btn::backdrop, .fullscreen-btn:fullscreen {
+  background-image: url("/assets/fullscreen_exit.svg");
 }/*# sourceMappingURL=main.css.map */

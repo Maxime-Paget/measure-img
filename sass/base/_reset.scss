@@ -75,6 +75,10 @@ select {
     font: inherit;
 }
 
+input:user-invalid {
+    border: solid 1px red;
+}
+
 
 html {
     scroll-behavior: smooth;

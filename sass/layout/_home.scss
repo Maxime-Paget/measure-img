@@ -4,6 +4,16 @@ body {
 
 header {
     height: 10svh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    & .scale {
+        &-container {
+            height: 100%;
+            position: relative
+        }
+    }
 }
 
 main {
@@ -54,6 +64,7 @@ footer {
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center center;
+        aspect-ratio: 16/9;
     }
     &-add {
         cursor: pointer;
@@ -62,5 +73,43 @@ footer {
     & .line {
         position: absolute;
         background-color: red;
+    }
+    &-nav {
+        display: flex;
+        list-style: none;
+        align-items: center;
+        gap: .2rem;
+        &__item {
+            margin-top: .1rem;
+            & a {
+                display: inline-block;
+                width: 1.5rem;
+                height: 1.5rem;
+                background-color: #333;
+                background-clip: content-box;
+                border-radius: 50%;
+            }
+        }
+    }
+}
+
+:fullscreen {
+    & .fullscreen-btn {
+        background-image: url('/assets/fullscreen_exit.svg');
+    }
+}
+
+.fullscreen-btn {
+    position: absolute;
+    top: 1%;
+    right: 1%;
+    background-image: url('/assets/fullscreen.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 2rem;
+    width: 2rem;
+    &::backdrop, &:fullscreen {
+        background-image: url('/assets/fullscreen_exit.svg');
     }
 }

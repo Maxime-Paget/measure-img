@@ -13,18 +13,34 @@ class Slide extends HTMLCanvasElement {
         this.src = this.getAttribute('src')?.trim();
         this.slideid = this.getAttribute('slideid'); 
         /** @type {boolean} */ this.isPressed = false;
+        this.id = `slide_${this.slideid}`
+        this.fullscreen = false;
     }
     
     connectedCallback() {
-        this.style = `--slide-image: url(${this.src});`
+        this.style = `--slide-image: url(${this.src});`;
         this.classList.add('carousel__slide');
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.classList.add('fullscreen-btn');
+        this.insertAdjacentElement('afterend', fullscreenBtn);
+
+        this.parentElement.onfullscreenchange = () => {
+            this.fullscreen = !this.fullscreen;
+        }
+
+        fullscreenBtn.addEventListener('click', () => {
+            this.fullscreen
+                ? document.exitFullscreen()
+                : this.parentElement.requestFullscreen();
+        })
 
         /** @type {Line?} */
         let line;
 
-        this.addEventListener('mouseup', (ev) => {
-            this.isPressed = false;
-        })
+        // this.addEventListener('mouseup', (ev) => {
+        //     this.isPressed = false;
+        // })
 
         this.addEventListener('mouseleave', (ev) => {
             this.isPressed = false;
@@ -32,9 +48,11 @@ class Slide extends HTMLCanvasElement {
 
         this.addEventListener('mousedown', (ev) => {
             ev.preventDefault()
+            this.isPressed = !this.isPressed;
+            if(!this.isPressed) return;
+
             this.width = this.clientWidth || 652;
             this.height = this.clientHeight || 352;
-            this.isPressed = true;
             const startX=ev.offsetX
             const startY=ev.offsetY
             line = new Line({ x: startX, y: startY });
@@ -76,6 +94,9 @@ class Slide extends HTMLCanvasElement {
      */
     attributeChangedCallback(name, oldValue, newValue) {
         this[name] = newValue;
+        if (name === 'slideid') {
+            this.id = `slide_${this.slideid}`
+        }
     }
 
 }
